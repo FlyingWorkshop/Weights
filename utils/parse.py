@@ -5,14 +5,22 @@ import re
 INTERVAL = r"(\d+(?:-\d+)?)"  # regex pattern that captures set data (ex: '5-10' --> (5, 10) or '8' --> 8)
 
 
-def process(filename: str) -> list[str]:
+def process(filename: str) -> dict[str: str, str: list[str]]:
     """
     The purpose of this method is to weed out bad lines (e.g. title, blanks, etc.) and
     also to group relevant lines together (e.g. lines about the same exercise)
     """
+    data = {"title": "", "lines": []}
+
     with open(filename) as f:
+        data["title"] = next(f).strip().lower()
+        if data["title"].endswith("or"):
+            data["title"] = data["title"] + " " + next(f).strip().lower()
         raw_lines = [line.strip().lower() for line in f if line and _has_digit(line)]
-    cooked_lines = []
+
+    # with open(filename) as f:
+    #     raw_lines = [line.strip().lower() for line in f if line and _has_digit(line)]
+
     i = 0
     while i < len(raw_lines):
         line = raw_lines[i]
@@ -21,9 +29,9 @@ def process(filename: str) -> list[str]:
             if _is_homoousian(succ):
                 i += 1
                 line = line + " " + succ
-        cooked_lines.append(line)
+        data["lines"].append(line)
         i += 1
-    return cooked_lines
+    return data
 
 
 def get_name(line: str) -> str:
