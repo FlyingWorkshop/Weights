@@ -1,5 +1,6 @@
 # Weights
 
-This project is something I coded for myself. It takes texts I get from my personal trainer and formats them in a useful manner. The goal of this project is to automate simple calculations (e.g. how much weight do I need to load onto an Olympic lifting bar which weights around 45 lbs. in order to life 100 lbs.?). I'm also going to try to implement a GUI to display the data with QT.
+This is a personal project that parses texts I get from my personal trainer using a Python parser. The parser caches the parsed
+data as a JSON which is then read in C++ and displayed with Qt.
 
-Since this is a personal project, I didn't focus on making an extremely robust parsing routine. It works enough to get the job done though. I have provided two sample workout texts for testing, but I'm not releasing my full dev set.
+Since this is a personal project, I didn't focus on making a universally robust parsing routine. The routine works and is robust for texts from my personal trainer, but it probably doesn't work on other inputs. I have provided two sample workout texts for testing, but I'm not releasing my full dev set since I don't want to publically release my workouts.
